@@ -71,24 +71,24 @@ export const faqItems = [
   {
     id: "01",
     title: "How long does a typical project take?",
-    desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui eius maiores, pariatur inventore velit quos tempora dolorem?",
+    desc: "Most projects take between 4 and 12 weeks, depending on their scope, complexity, and requirements. We'll provide a clear timeline before development begins.",
   },
   {
     id: "02",
     title: "Do you offer ongoing retainer support?",
-    desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui eius maiores, pariatur inventore velit quos tempora dolorem?",
+    desc: "Yes. We offer flexible retainer plans for maintenance, feature enhancements, product management, performance optimization, and long-term support.",
   },
   {
     id: "03",
     title: "What does your process look like?",
-    desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui eius maiores, pariatur inventore velit quos tempora dolorem?",
+    desc: "Our process starts with discovery and planning, followed by design, development, testing, and launch. We collaborate closely with you at every stage.",
   },
 ];
 
-export const testimonails = [
+export const testimonials = [
   {
     id: 1,
-    desc: "Magnat completely transformed how our brand shows up. Revenue grew 3× in six months.",
+    desc: "Studio Antenix completely transformed how our brand shows up. Revenue grew 3× in six months.",
     author: "James O., CMO at Traxis",
   },
   {

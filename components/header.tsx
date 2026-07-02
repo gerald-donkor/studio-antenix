@@ -1,16 +1,60 @@
 "use client";
-import React, { useState } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
+import React, { useRef, useState } from "react";
 import { navItems } from "./constant/data";
 import Link from "next/link";
 import { RiMenu4Line, RiCloseLine } from "@remixicon/react";
 
 export default function Header() {
+  const headerRef = useRef<HTMLElement | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  useGSAP(
+    () => {
+      const links = gsap.utils.toArray<HTMLLinkElement>(
+        ".link",
+        headerRef.current,
+      );
+      const onMouseEnter = (e: MouseEvent) => {
+        gsap.to(links, {
+          opacity: 0.2,
+          overwrite: true,
+        });
+        gsap.to(e.currentTarget, {
+          opacity: 1,
+          overwrite: true,
+        });
+      };
+
+      const onMouseLeave = () => {
+        gsap.to(links, {
+          opacity: 1,
+          overwrite: true,
+        });
+      };
+
+      links.forEach((link) => {
+        link.addEventListener("mouseover", onMouseEnter);
+        link.addEventListener("mouseleave", onMouseLeave);
+      });
+      //clean up
+      return () =>{
+        links.forEach((link) => {
+        link.removeEventListener("mouseover", onMouseEnter);
+        link.removeEventListener("mouseleave", onMouseLeave);
+      });
+      }
+    },
+    { scope: headerRef },
+  );
+
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <header className="fixed top-0 left-0 w-full py-3 z-50 bg-linear-to-b from-black/40 to-95%">
+    <header
+      ref={headerRef}
+      className="fixed top-0 left-0 w-full py-3 z-50 bg-linear-to-b from-black/40 to-95%"
+    >
       <div className="container flex items-center justify-between relative">
         {/* Logo */}
         <span className="font-semibold text-white">Studio-Antenix</span>
@@ -21,13 +65,13 @@ export default function Header() {
         >
           {navItems.map(({ id, label, href }) => (
             <li key={id}>
-              <Link href={href} className="text-2xl font-bold">
+              <Link href={href} className="text-2xl font-bold link">
                 {label}
               </Link>
             </li>
           ))}
           <li>
-            <Link href={"#"} className="text-2xl font-bold">
+            <Link href={"#"} className="text-2xl font-bold link">
               Stay connected
             </Link>
           </li>
@@ -43,13 +87,13 @@ export default function Header() {
         <ul className="hidden lg:flex items-center text-white">
           {navItems.map(({ id, label, href }) => (
             <li key={id}>
-              <Link href={href} className="text-lg px-6">
+              <Link href={href} className="text-lg px-6 link">
                 {label}
               </Link>
             </li>
           ))}
           <li className="ml-6">
-            <Link href={"#"} className="text-lg">
+            <Link href={"#"} className="text-lg link">
               Stay connected
             </Link>
           </li>

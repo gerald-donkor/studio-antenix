@@ -87,11 +87,11 @@ export default function Hero() {
   return (
     <>
       {/* Preloader */}
-      <div className="preloader-wrapper h-screen z-60 fixed top-0 left-0 w-full bg-white flex items-center justify-center">
+      {/* <div className="preloader-wrapper h-screen z-60 fixed top-0 left-0 w-full bg-white flex items-center justify-center">
         <p className="loader-text font-bold text-3xl lg:text-6xl text-primary leading-normal invisible">
           Studio Antenix
         </p>
-      </div>
+      </div> */}
       {/* Hero section */}
       <section className="bg-[url('/images/hero-bg-img.png')] min-h-screen bg-cover bg-center bg-no-repeat relative">
         {/* grid lines */}

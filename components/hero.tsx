@@ -50,14 +50,16 @@ export default function Hero() {
         },
         "-=0.2",
       )
-      .from(".line", {
-        scaleY: 0,
-        transformOrigin: "top center",
-        stagger: 0.1,
-        ease: "expo.out",
-      },
-      "-=0.2"
-    )
+      .from(
+        ".line",
+        {
+          scaleY: 0,
+          transformOrigin: "top center",
+          stagger: 0.1,
+          ease: "expo.out",
+        },
+        "-=0.2",
+      )
       .from(
         heroTextSplit.words,
         {
@@ -80,7 +82,7 @@ export default function Hero() {
         opacity: 0,
         y: 30,
         ease: "power2.out",
-      });
+      },"-=75%");
   });
   return (
     <>

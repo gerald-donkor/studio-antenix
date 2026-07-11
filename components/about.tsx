@@ -1,13 +1,80 @@
-import React from "react";
+"use client";
+import { gsap, useGSAP, SplitText } from "@/lib/gsap";
 import Button from "./button";
 import Image from "next/image";
 import { RiAddLine, RiArrowRightLongLine } from "@remixicon/react";
 import { services } from "./constant/data";
 import Link from "next/link";
+import { useRef } from "react";
 
 export default function About() {
+  const aboutRef = useRef<HTMLElement | null>(null);
+  useGSAP(() => {
+    const aboutSplit = SplitText.create(".about-text", {
+      type: "words, lines",
+      mask: "lines",
+    });
+
+    const tl = gsap.timeline({
+      defaults: { duration: 1 },
+      scrollTrigger: {
+        trigger: aboutRef.current,
+        start: "top center",
+        // markers: true,
+      },
+    });
+
+    tl.from(aboutSplit.words, {
+      yPercent: 120,
+      opacity: 0,
+      stagger: 0.02,
+      ease: "power4.out",
+    })
+      .from(
+        ".avatar-wrapper",
+        {
+          opacity: 0,
+          ease: "power2.inOut",
+        },
+        "<",
+      )
+      .from(
+        ".about-btn",
+        {
+          opacity: 0,
+          ease: "power1.out",
+        },
+        "<",
+      )
+      .from(
+        ".about-subtitle",
+        {
+          opacity: 0,
+          ease: "power2.inOut",
+        },
+        "<",
+      )
+      .from(
+        ".about-stats",
+        {
+          opacity: 0,
+          ease: "power1.out",
+        },
+        "<",
+      )
+      .from(
+        ".about-card",
+        {
+          opacity: 0,
+          yPercent: 10,
+          stagger: 0.3,
+          ease: "power2.inOut",
+        },
+        "-=75%",
+      );
+  });
   return (
-    <section>
+    <section ref={aboutRef}>
       <div>
         {/* wrapper */}
         <div className="border-b border-black/15"></div>
@@ -23,7 +90,7 @@ export default function About() {
             {/* wrapper */}
             <div className="flex items-center justify-between flex-wrap space-y-4 mt-10 lg:mt-16">
               {/* Avatars */}
-              <div className="flex items-center -space-x-4">
+              <div className="flex items-center -space-x-4 avatar-wrapper">
                 {["/images/avatar-1.png", "/images/avatar-2.png"].map((img) => (
                   <div
                     key={img}
@@ -39,7 +106,7 @@ export default function About() {
                 </Button>
               </div>
               {/* Btn */}
-              <Button className="bg-black text-white rounded-full group">
+              <Button className="bg-black text-white rounded-full group about-btn">
                 <span className="px-3.5 lg:px-4">Learn about us</span>
                 <span className="size-11 flex items-center justify-center bg-white rounded-full text-black group-hover:-rotate-54 duration-200 transition-transform">
                   <RiArrowRightLongLine />
@@ -49,9 +116,9 @@ export default function About() {
           </div>
           {/* Stats */}
           <div className="py-11 lg:py-16 flex flex-col">
-            <p className="subtitle">ABOUT STUDIO-ANTENIX</p>
+            <p className="subtitle about-subtitle">ABOUT STUDIO-ANTENIX</p>
             {/* wrapper */}
-            <div className="mt-auto">
+            <div className="mt-auto about-stats">
               <h2 className="text-4xl lg:text-5xl font-bold">
                 $259<span className="text-primary">M+</span>
               </h2>
@@ -66,7 +133,7 @@ export default function About() {
           {services.map(({ id, title, icon: Icon, desc }) => (
             <div
               key={id}
-              className="p-6 lg:p-7 border-2 border-black/15 nth-[2]:bg-primary-2 rounded-xl group bg-white nth-[2]:border-primary/20"
+              className="p-6 lg:p-7 border-2 border-black/15 nth-[2]:bg-primary-2 rounded-xl group bg-white nth-[2]:border-primary/20 about-card"
             >
               {/* Icon */}
               <span className="size-18 flex items-center justify-center bg-gray-200 group-even:bg-primary group-even:text-white rounded-full">

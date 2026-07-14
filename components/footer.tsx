@@ -1,17 +1,60 @@
+"use client";
+import { gsap, useGSAP, SplitText } from "@/lib/gsap";
 import {
   RiInstagramLine,
   RiLinkedinFill,
   RiTwitterXLine,
 } from "@remixicon/react";
 import Link from "next/link";
-import React from "react";
+import React, { useRef } from "react";
 
 export default function Footer() {
+  const footerRef = useRef<HTMLElement | null>(null);
+  useGSAP(
+    () => {
+      const textSplit = SplitText.create(".footer-text", {
+        type: "chars,lines",
+        mask: "chars",
+      });
+      const tl = gsap.timeline({
+        default: { duration: 1 },
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: "top-center",
+          // markers: true,
+        },
+      });
+
+      tl.from(".footer-top", {
+        opacity: 0,
+        ease: "power2.inOut",
+      })
+        .from(
+          ".footer-bottom",
+          {
+            opacity: 0,
+            stagger: 0.03,
+            ease: "power2.inOut",
+          },
+          "<+0.3",
+        )
+        .from(
+          textSplit.chars,
+          {
+            yPercent: -100,
+            stagger: 0.03,
+            ease: "power2.inOut",
+          },
+          "<",
+        );
+    },
+    { scope: footerRef },
+  );
   return (
-    <footer className="bg-secondary text-white">
+    <footer ref={footerRef} className="bg-secondary text-white">
       <div>
         {/* Footer top */}
-        <div className="container grid lg:grid-cols-[1fr_0.6fr] divide-x divide-white/15">
+        <div className="container grid lg:grid-cols-[1fr_0.6fr] divide-x divide-white/15 footer-top">
           {/* wrapper */}
           <div className="py-7 pr-8">
             <p>Let's get in touch</p>
@@ -36,12 +79,12 @@ export default function Footer() {
               </div>
             </div>
           </div>
-          {/* box */}
+          {/* spacer */}
+          <div className="py-7 pl-8" />
         </div>
-        <div />
         <hr className="text-white/9" />
         {/* Footer bottom */}
-        <div className="container pt-24 lg:pt-28 pb-6">
+        <div className="container pt-24 lg:pt-28 pb-6 footer-bottom">
           {/* List */}
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {/* our office */}
@@ -65,7 +108,7 @@ export default function Footer() {
               <p>+1221234567</p>
             </div>
           </div>
-          <h2 className="font-bold text-[90px] sm:text-[120px] lg:text-[170px] leading-snug">
+          <h2 className="font-bold text-[90px] sm:text-[120px] lg:text-[170px] leading-snug footer-text">
             Studio Antenix
           </h2>
           {/* wrapper */}

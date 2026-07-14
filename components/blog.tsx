@@ -1,5 +1,5 @@
 "use client";
-import { gsap, useGSAP, SplitText, ScrollTrigger } from "@/lib/gsap";
+import { gsap, useGSAP, SplitText } from "@/lib/gsap";
 import { blogItems } from "./constant/data";
 import Image from "next/image";
 import Link from "next/link";

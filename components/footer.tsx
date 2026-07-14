@@ -41,7 +41,7 @@ export default function Footer() {
         .from(
           textSplit.chars,
           {
-            yPercent: -100,
+            xPercent: -100,
             stagger: 0.03,
             ease: "power2.inOut",
           },
@@ -57,7 +57,7 @@ export default function Footer() {
         <div className="container grid lg:grid-cols-[1fr_0.6fr] divide-x divide-white/15 footer-top">
           {/* wrapper */}
           <div className="py-7 pr-8">
-            <p>Let's get in touch</p>
+            <p>{"Let's get in touch"}</p>
             <h2 className="font-semibold text-3xl lg:text-4xl">
               design@studioantenix.com
             </h2>
@@ -120,8 +120,8 @@ export default function Footer() {
               Terms of service
             </Link>
             <p>
-              &copy; {new Date().getFullYear()} Studio Antenix.Allrights
-              reserved
+              &copy; {new Date().getFullYear()} Studio Antenix. All rights
+              reserved.
             </p>
             <p></p>
           </div>

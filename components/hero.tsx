@@ -29,7 +29,7 @@ export default function Hero() {
       ease: "power4.out",
     })
       .from(
-        ".leader-text",
+        ".loader-text",
         {
           filter: "blur(10px)",
           ease: "power2.out",
